@@ -39,43 +39,43 @@ class Rosalind:
             '': ['UGA', 'UAA', 'UAG']}
 
     def count_nucleotides(self, seq):
-        """Exercise 1: Counting DNA Nucleotides
+        """Returns the number of nucleotides, listed in alphabetical order.
 
-        Args:
-            seq (string): string of nucleotides to count
-
-        Returns:
-            tuple: tuple of ints for the amount of A, T, C and G
-            nucleotides present in the sequence.
+        :param seq: DNA sequence
+        :type seq: str
+        :return: number of each nucleotide in the order [A, C, G, Transcribes]
+        :rtype: list
         """
+
+        # Rosalind expects alphabeticallt sorted outputs
+        nucleotides = {'A': [], 'C': [], 'G': [], 'T': []}
         seq = seq.upper()
-        len_A = len([x for x in seq if x == 'A'])
-        len_T = len([x for x in seq if x == 'T'])
-        len_C = len([x for x in seq if x == 'C'])
-        len_G = len([x for x in seq if x == 'G'])
-        return len_A, len_T, len_C, len_G
+        for key, _ in nucleotides.items():
+            nucleotides.update(
+                {key: len([x for x in seq if x == key])})
+        counts = list(nucleotides.values())
+        return " ".join([str(x) for x in counts])
 
     def transcribe_dna(self, seq):
-        """Exercise 2: Transcribing DNA into RNA
+        """Transcribes a string of DNA into its RNA equivalent e.g
+           'AACTCAG'  --> 'UUGAGUC'.
 
-        Args:
-            seq (string): string of nucleotides to transcribe
-
-        Returns:
-            string: mRNA string of transcribed DNA
+        :param seq: DNA sequences
+        :type seq: str
+        :return: RNA conversation of input DNA sequence
+        :rtype: str
         """
         seq = seq.upper()
         mrna = seq.replace('T', 'U')
         return mrna
 
     def get_compliment(self, seq):
-        """Exercise 3: Complimenting a strand of DNA into reverse DNA compliment
+        """Computes the reverse compliment of a sequence of DNA
 
-        Args:
-            seq (string): string of nucleotides to reverse complement
-
-        Returns:
-            string: The reverse DNA compliment
+        :param seq: DNA sequence
+        :type seq: str
+        :return: Reverse strand to the DNA input sequences
+        :rtype: str
         """
         seq = seq.upper()
         seq_reversed = seq[::-1]
@@ -84,33 +84,33 @@ class Rosalind:
 
         return seq_compliment
 
-    def fib(self, n, k):
-        """Exercise 4: Wascally Wabbits
+    def rabbits(self, n, k):
+        """ascally Wabbits: Returns the total number of rabbits produced ater n generations,
+           when given a reproduction factor of k. 
 
-        Args:
-            n (int): number of generations
-            k (int): reproduction factor
-
-        Returns:
-            int: Total number of rabbits after n generations
+        :param n: number of generations
+        :type n: int
+        :param k: reproduction factor
+        :type k: int
+        :return: Total number of rabbits after n generations
+        :rtype: int
         """
 
         if n == 1 or n == 2:
             return 1
 
-        term1 = self.fib(n-1, k)
-        term2 = self.fib(n-2, k)
+        term1 = self.rabbits(n-1, k)
+        term2 = self.rabbits(n-2, k)
         term3 = term1 + (k * term2)
         return term3
 
     def parse_fasta(self, filename):
-        """Exercise 5: Parsing FASTA files
+        """Parses FASTA files and returns a sequence record. Keys: Roslaind IDs, values: genomic sequence.
 
-        Args:
-            filename (string): name of text file containing FASTA data
-
-        Returns:
-            dict: Record object where keys are FASTA labels and values are FASTA sequences
+        :param filename: name of text file containing FASTA data
+        :type filename: str
+        :return: Record object where keys are FASTA labels and values are FASTA sequences
+        :rtype: dict
         """
         with open(filename, 'r') as f:
             # Remove newline characters
@@ -119,6 +119,7 @@ class Rosalind:
             # Extract Rosalind sequences
             seqs = [re.findall(r'Rosalind_\d\d\d\d(.*)', x)
                     for x in txt if x != '']
+
             # Extract Rosalind ids
             ids = [re.match(r'(.*)Rosalind_\d\d\d\d', x)
                    for x in txt if x != '']
@@ -128,13 +129,12 @@ class Rosalind:
         return record
 
     def __compute_gc_contents(self, seq):
-        """ Exercise 5: Compute the CC content of a single sequence
+        """Computes the CC content of a single nucleotide sequence.
 
-        Args:
-            seq (string): sequence to compute GC score on
-
-        Returns:
-            int: gc percentage of sequence
+        :param seq: sequence to compute GC score on
+        :type seq: str
+        :return: gc percentage of sequence
+        :rtype: int
         """
         seq = "".join(seq)
         desired_nucleotides = ['G', 'C']
@@ -143,20 +143,16 @@ class Rosalind:
         return gc_content
 
     def get_gc_contents(self, record):
-        """Exercise 5: Reutrns the GC score of all sequences in a sequence record object.
+        """Reutrns the GC score of all items in a sequence record object.
 
-        Args:
-            record (dict):keys are sequence labels, values are the respective sequences.
-
-
-        Raises:
-            TypeError: If the variable record is not a dict, raise TypeError.
-
-        Returns:
-            dict, [string, int]: returns dict containing {labels:GC-percentage} as
+        :param record: keys are sequence labels, values are the respective sequences.
+        :type record: dict
+        :raises TypeError: if type(record) not dictionary   
+        :return: collection containing {labels:GC-percentage} as
                                 well as top the label and score with highest the GC percentage.
+        :rtype: dict
         """
-
+        
         # Check the type of the input variable
         if isinstance(record, dict) == False:
             raise TypeError(
@@ -181,7 +177,7 @@ class Rosalind:
         return gc_scores, [max_label, max_score]
 
     def compute_punnet(self, alleles_1, alleles_2, get_dominance_ratio=False):
-        """Returns the set of genotype ratios for the new generation along with a punnet square of a parental genotype cross.
+        """Returns the set of genotype ratios for the new generation along with a punnet square of the parental genotype cross.
 
         :param alleles_1: parent 1 allele set
         :type alleles_1: str
@@ -292,13 +288,11 @@ class Rosalind:
 
             # Account for sequence variant selection and final probabilities for dominant offspring
             if len(np.unique(combination)) > 1:
-                # --Sequence variant selection--
                 # (ratio_allele_selection_1/n_pop X ratio_allele_selection_1/n_pop-1 * 2) * dominance_ratio
                 proba = (genepool_stats[combination[0]] *
                          genepool_stats_2[combination[1]] * 2) * dominance_ratio
             else:
-                # --Sequence invariant selection--
-                # (ratio_allele_selection_1/n_pop X ratio_allele_selection_1/n_pop-1 * 1) * dominance_ratio
+                # Same for invariant selection
                 proba = (genepool_stats[combination[0]] *
                          genepool_stats_2[combination[1]] * 1) * dominance_ratio
 
@@ -357,7 +351,7 @@ class Rosalind:
             return idxs
 
     def convert_fasta_to_pandas(self, record):
-        seqs = list(rec.values())
+        seqs = list(record.values())
 
         for i, seq in enumerate(seqs):
             char_seq = [x[0] for x in seq]
@@ -368,7 +362,7 @@ class Rosalind:
             else:
                 df = pd.concat([df, df_seq])
 
-        df.index = list(rec.keys())
+        df.index = list(record.keys())
         return df
 
     def get_consensus(self, record, print_report=True):
@@ -411,7 +405,5 @@ class Rosalind:
 R = Rosalind()
 
 # Call method
-rec = R.parse_fasta('data/rosalind_cons.txt')
-cmat, cseq = R.get_consensus(rec)
-print()
-print(cseq)
+n = R.count_nucleotides("ACCGGGTTTT")
+print(n)
