@@ -48,7 +48,7 @@ class Rosalind:
 
         :param seq: DNA sequence
         :type seq: str
-        :return: number of each nucleotide in the order [A, C, G, Transcribes]
+        :return: number of each nucleotide in the order [A, C, G, T]
         :rtype: list
         """
 
