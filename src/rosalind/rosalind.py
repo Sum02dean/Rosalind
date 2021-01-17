@@ -7,7 +7,12 @@ import pandas as pd
 import pydot
 from collections import Counter
 
-
+"""This class is to store all of the code required to complete the entire stack of Rosalind problems http://rosalind.info/problems/list-view/
+    Feel free to fork this repository and begin building your own bioinformatics package.
+    
+    Author: Dean Sumner 
+    License: Open source license MIT
+    """
 class Rosalind:
     def __init__(self):
         self.compliment = {'A': 'T',
@@ -177,7 +182,7 @@ class Rosalind:
         return gc_scores, [max_label, max_score]
 
     def compute_punnet(self, alleles_1, alleles_2, get_dominance_ratio=False):
-        """Returns the set of genotype ratios for the new generation along with a punnet square of the parental genotype cross.
+        """Returns the set of genotype ratios for the new generation along with a punnet square of the parental cross.
 
         :param alleles_1: parent 1 allele set
         :type alleles_1: str
