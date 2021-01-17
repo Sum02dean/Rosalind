@@ -85,7 +85,7 @@ class Rosalind:
         return seq_compliment
 
     def rabbits(self, n, k):
-        """ascally Wabbits: Returns the total number of rabbits produced ater n generations,
+        """Wascally Wabbits: Returns the total number of rabbits produced ater n generations,
            when given a reproduction factor of k. 
 
         :param n: number of generations
@@ -129,7 +129,7 @@ class Rosalind:
         return record
 
     def __compute_gc_contents(self, seq):
-        """Computes the CC content of a single nucleotide sequence.
+        """Computes the GC content of a single nucleotide sequence.
 
         :param seq: sequence to compute GC score on
         :type seq: str
@@ -143,7 +143,7 @@ class Rosalind:
         return gc_content
 
     def get_gc_contents(self, record):
-        """Reutrns the GC score of all items in a sequence record object.
+        """Reutrns the GC score of all sequences in a fasta record object.
 
         :param record: keys are sequence labels, values are the respective sequences.
         :type record: dict
@@ -152,7 +152,7 @@ class Rosalind:
                                 well as top the label and score with highest the GC percentage.
         :rtype: dict
         """
-        
+
         # Check the type of the input variable
         if isinstance(record, dict) == False:
             raise TypeError(
@@ -259,6 +259,18 @@ class Rosalind:
         return stats, genepool
 
     def get_mendelian_probas(self, HH=2, Hh=2, hh=2):
+        """Computes the mendelian probability of an individual inheriting a domninat allel, 
+           assuming any two randomly chosen individual can mate from a know genegool. 
+
+        :param HH: number of homozygous individuals, defaults to 2
+        :type HH: int, optional
+        :param Hh: number of heterozygous individuals, defaults to 2
+        :type Hh: int, optional
+        :param hh: number of homozygous recessive individuals, defaults to 2
+        :type hh: int, optional
+        :return: the probability of an individual containing dominant allele after random parental mating.
+        :rtype: float
+        """
         # Initialize empty probability
         probas = []
 
@@ -303,7 +315,16 @@ class Rosalind:
         return sum_proba
 
     def __codon_generator(self, seq, n=3):
-        """Yield successive n-sized chunks from seq."""
+        """Generator object which yields n-sized chunked subsequences from seq 
+           e.g. 'AAACCCGGG' --> ['AAA','CCC,'GGG].
+
+        :param seq: nucleotide sequences    
+        :type seq: str  
+        :param n: chunking size, defaults to 3
+        :type n: int, optional
+        :yield: list of n-sized substring chunks
+        :rtype: list
+        """
         for i in range(0, len(seq), n):
             yield seq[i:i + n]
 
@@ -343,14 +364,22 @@ class Rosalind:
         idxs = [m.start() + 1 for m in re.finditer(
             '(?={0})'.format(re.escape(subseq)), seq)]
 
+        # Format as expected for Roslaind challenge
         if strip_comma:
-            # To remove comma and return integers as characters (expected format for Roslaind challenge)
             idxs = ' '.join([str(x) for x in idxs])
             return idxs
         else:
             return idxs
 
     def convert_fasta_to_pandas(self, record):
+        """Converts a fasta record object to pandas DataFrame. 
+           Columns represent nucleotides, rows individual sequences.     
+
+        :param record: fasta record object
+        :type record: dict
+        :return: Formatted DataFrame    
+        :rtype: pandas DataFrame
+        """
         seqs = list(record.values())
 
         for i, seq in enumerate(seqs):
@@ -366,6 +395,15 @@ class Rosalind:
         return df
 
     def get_consensus(self, record, print_report=True):
+        """Computes the consensus sequence and consensus matrix of a fasta record.
+
+        :param record: fasta record
+        :type record: dict
+        :param print_report: set to true to print out Rosalind format, defaults to True
+        :type print_report: bool, optional
+        :return: consnsus sequence, consensus matrix
+        :rtype: str, np.array
+        """
         # Convert fasta to pandas dataframe
         df = self.convert_fasta_to_pandas(record)
         x = np.array(df)
