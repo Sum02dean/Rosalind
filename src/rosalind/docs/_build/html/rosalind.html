@@ -165,27 +165,98 @@
 <em class="property">class </em><code class="sig-prename descclassname">rosalind.</code><code class="sig-name descname">Rosalind</code><a class="headerlink" href="#rosalind.Rosalind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
-<dt id="rosalind.Rosalind.count_nucleotides">
-<code class="sig-name descname">count_nucleotides</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.count_nucleotides" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 1: Counting DNA Nucleotides</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>seq (string): string of nucleotides to count</p>
+<dt id="rosalind.Rosalind.compute_punnet">
+<code class="sig-name descname">compute_punnet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alleles_1</span></em>, <em class="sig-param"><span class="n">alleles_2</span></em>, <em class="sig-param"><span class="n">get_dominance_ratio</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.compute_punnet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of genotype ratios for the new generation along with a punnet square of the parental cross.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alleles_1</strong> (<em>str</em>) – parent 1 allele set</p></li>
+<li><p><strong>alleles_2</strong> (<em>str</em>) – parent 2 allele set</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>tuple: tuple of ints for the amount of A, T, C and G
-nucleotides present in the sequence.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>genotype ratio in the new generation, punnet crosses</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict, list</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="rosalind.Rosalind.fib">
-<code class="sig-name descname">fib</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.fib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 4: Wascally Wabbits</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>n (int): number of generations
-k (int): reproduction factor</p>
+<dt id="rosalind.Rosalind.convert_fasta_to_pandas">
+<code class="sig-name descname">convert_fasta_to_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.convert_fasta_to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Converts a fasta record object to pandas DataFrame. </dt><dd><p>Columns represent nucleotides, rows individual sequences.</p>
 </dd>
-<dt>Returns:</dt><dd><p>int: Total number of rabbits after n generations</p>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>record</strong> (<em>dict</em>) – fasta record object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Formatted DataFrame</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.count_nucleotides">
+<code class="sig-name descname">count_nucleotides</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.count_nucleotides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of nucleotides, listed in alphabetical order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seq</strong> (<em>str</em>) – DNA sequence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>number of each nucleotide in the order [A, C, G, T]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.count_point_mutations">
+<code class="sig-name descname">count_point_mutations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq1</span></em>, <em class="sig-param"><span class="n">seq2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.count_point_mutations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of point mutations when comparing two sequences of the same length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq1</strong> (<em>string</em>) – first sequence to compare</p></li>
+<li><p><strong>seq2</strong> (<em>string</em>) – second sequence to compare</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the number of mismatched nucleotides</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.find_motif">
+<code class="sig-name descname">find_motif</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em>, <em class="sig-param"><span class="n">subseq</span></em>, <em class="sig-param"><span class="n">strip_comma</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.find_motif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the seq indices of the first character in the matched subseq.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq</strong> (<em>str</em>) – dna sequence</p></li>
+<li><p><strong>subseq</strong> (<em>str</em>) – dna sub-sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of indicies</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>lsit</p>
 </dd>
 </dl>
 </dd></dl>
@@ -193,11 +264,36 @@ k (int): reproduction factor</p>
 <dl class="py method">
 <dt id="rosalind.Rosalind.get_compliment">
 <code class="sig-name descname">get_compliment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.get_compliment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 3: Complimenting a strand of DNA into</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>seq (string): string of nucleotides to reverse complement</p>
+<dd><p>Computes the reverse compliment of a sequence of DNA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seq</strong> (<em>str</em>) – DNA sequence</p>
 </dd>
-<dt>Returns:</dt><dd><p>string: The reverse DNA compliment</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Reverse strand to the DNA input sequences</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.get_consensus">
+<code class="sig-name descname">get_consensus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">print_report</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.get_consensus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the consensus sequence and consensus matrix of a fasta record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – fasta record</p></li>
+<li><p><strong>print_report</strong> (<em>bool</em><em>, </em><em>optional</em>) – set to true to print out Rosalind format, defaults to True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>consnsus sequence, consensus matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str, np.array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -205,16 +301,65 @@ k (int): reproduction factor</p>
 <dl class="py method">
 <dt id="rosalind.Rosalind.get_gc_contents">
 <code class="sig-name descname">get_gc_contents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.get_gc_contents" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 5: Reutrns the GC score of all sequences in a record(dict) object</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>record (dict): record where keys are sequence labels and values are the respective</p>
+<dd><p>Reutrns the GC score of all sequences in a fasta record object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>record</strong> (<em>dict</em>) – keys are sequence labels, values are the respective sequences.</p>
 </dd>
-<dt>Raises:</dt><dd><p>TypeError: If the variable records is not a dict</p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – if type(record) not dictionary</p>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt>dict, [string, int]: returns reverse ordered dict containing {labels:GC-percentage} as </dt><dd><p>well as top the label and score with highest GC contents</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>collection containing {labels:GC-percentage} as
+well as top the label and score with highest the GC percentage.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.get_genepool_stats">
+<code class="sig-name descname">get_genepool_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">HH</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">Hh</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">hh</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">genepool</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.get_genepool_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the statistics of genotypes in a genepool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>HH</strong> (<em>int</em><em>, </em><em>optional</em>) – number of homozyhous dominant individuals, defaults to 2</p></li>
+<li><p><strong>Hh</strong> (<em>int</em><em>, </em><em>optional</em>) – number of heterozygous individuals, defaults to 2</p></li>
+<li><p><strong>hh</strong> (<em>int</em><em>, </em><em>optional</em>) – number of homozygous recessive indivoduals, defaults to 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>percentage of each genotype within a genepool</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.get_mendelian_probas">
+<code class="sig-name descname">get_mendelian_probas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">HH</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">Hh</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">hh</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.get_mendelian_probas" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Computes the mendelian probability of an individual inheriting a domninat allele, </dt><dd><p>assuming any two randomly chosen individual can mate from a know genegool.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>HH</strong> (<em>int</em><em>, </em><em>optional</em>) – number of homozygous individuals, defaults to 2</p></li>
+<li><p><strong>Hh</strong> (<em>int</em><em>, </em><em>optional</em>) – number of heterozygous individuals, defaults to 2</p></li>
+<li><p><strong>hh</strong> (<em>int</em><em>, </em><em>optional</em>) – number of homozygous recessive individuals, defaults to 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the probability of an individual containing dominant allele after random parental mating.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -222,11 +367,62 @@ k (int): reproduction factor</p>
 <dl class="py method">
 <dt id="rosalind.Rosalind.parse_fasta">
 <code class="sig-name descname">parse_fasta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.parse_fasta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 5: Parsing FASTA files</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>filename (string): name of text file containing FASTA data</p>
+<dd><p>Parses FASTA files and returns a sequence record. Keys: Roslaind IDs, values: genomic sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of text file containing FASTA data</p>
 </dd>
-<dt>Returns:</dt><dd><p>dict: Record object where keys are FASTA labels and values are FASTA sequences</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Record object where keys are FASTA labels and values are FASTA sequences</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.rabbits">
+<code class="sig-name descname">rabbits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.rabbits" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Wascally Wabbits: Returns the total number of rabbits produced ater n generations,</dt><dd><p>when given a reproduction factor of k.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – number of generations</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – reproduction factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Total number of rabbits after n generations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.seq_to_codons">
+<code class="sig-name descname">seq_to_codons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.seq_to_codons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls codon_generator().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rosalind.Rosalind.transalte_mrna">
+<code class="sig-name descname">transalte_mrna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.transalte_mrna" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses rna-seq string and returns the translated protein sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seq</strong> (<em>str</em>) – rna sequence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>amino-acid/protein sequence</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -234,11 +430,19 @@ k (int): reproduction factor</p>
 <dl class="py method">
 <dt id="rosalind.Rosalind.transcribe_dna">
 <code class="sig-name descname">transcribe_dna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rosalind.Rosalind.transcribe_dna" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exercise 2: Transcribing DNA into RNA</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>seq (string): string of nucleotides to transcribe</p>
+<dd><dl class="simple">
+<dt>Transcribes a string of DNA into its RNA equivalent e.g</dt><dd><p>‘AACTCAG’  –&gt; ‘UUGAGUC’.</p>
 </dd>
-<dt>Returns:</dt><dd><p>string: mRNA string of transcribed DNA</p>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seq</strong> (<em>str</em>) – DNA sequences</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>RNA conversation of input DNA sequence</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
