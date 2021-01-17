@@ -264,7 +264,7 @@ class Rosalind:
         return stats, genepool
 
     def get_mendelian_probas(self, HH=2, Hh=2, hh=2):
-        """Computes the mendelian probability of an individual inheriting a domninat allel, 
+        """Computes the mendelian probability of an individual inheriting a domninat allele, 
            assuming any two randomly chosen individual can mate from a know genegool. 
 
         :param HH: number of homozygous individuals, defaults to 2
