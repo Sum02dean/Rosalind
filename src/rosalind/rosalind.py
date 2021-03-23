@@ -52,7 +52,7 @@ class Rosalind:
         :rtype: list
         """
 
-        # Rosalind expects alphabeticallt sorted outputs
+        # Rosalind expects alphabetical sorted outputs
         nucleotides = {'A': [], 'C': [], 'G': [], 'T': []}
         seq = seq.upper()
         for key, _ in nucleotides.items():
@@ -217,7 +217,7 @@ class Rosalind:
             genotypes.update(
                 {geneset: len([x for x in punnet if x == geneset]) / len(punnet)})
 
-        # Compute the percentage of domant genotypes in the cross
+        # Compute the percentage of dominant genotypes in the cross
         dominance = [v for k, v in genotypes.items() if 'H' in k]
         if get_dominance_ratio:
             return genotypes, punnet, sum(dominance)
